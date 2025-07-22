@@ -18,15 +18,17 @@ export default function AddNote({ title, content, setTitle, setContent, isEditin
       <MarkText value={content} setValue={setContent} />
 
       {isEditing ? (
-        <div className="flex gap-3">
+        <div className="flex gap-3 justify-end">
           <UpdateNote onUpdate={onSave} />
           <DeleteNote noteId={editId} onDelete={onDelete} />
         </div>
       ) : (
-        <Button onClick={onSave} className="rounded h-8 cursor-pointer font-bold" variant="secondary" disabled={isSaving} title="Click to save">
-          {isSaving ? <Loader2 className="animate-spin" /> : <Save />}
-          Save
-        </Button>
+        <div className="flex justify-end">
+          <Button onClick={onSave} className="rounded h-8 cursor-pointer font-bold" variant="secondary" disabled={isSaving} title="Click to save">
+            {isSaving ? <Loader2 className="animate-spin" /> : <Save />}
+            Save
+          </Button>
+        </div>
       )}
     </div>
   );
