@@ -1,67 +1,43 @@
+import { Button } from "@/components/ui/button";
 import { useRef, useEffect } from "react";
 
-export default function MarkText(props) {
-  var ref = useRef();
+export default function MarkText({ value, setValue }) {
+  const ref = useRef();
 
   function format(command) {
     document.execCommand(command, false, null);
-    props.setValue(ref.current.innerHTML);
+    setValue(ref.current.innerHTML);
   }
-
-  useEffect(
-    function () {
-      if (ref.current && ref.current.innerHTML !== props.value) {
-        ref.current.innerHTML = props.value;
-      }
-    },
-    [props.value]
-  );
+  useEffect(() => {
+    if (ref.current && ref.current.innerHTML !== value) {
+      ref.current.innerHTML = value;
+    }
+  }, [value]);
 
   return (
-    <div>
-      <div>
-        <button
-          type="button"
-          onClick={function () {
-            format("bold");
-          }}
-        >
-          B
-        </button>
-        <button
-          type="button"
-          onClick={function () {
-            format("italic");
-          }}
-        >
-          I
-        </button>
-        <button
-          type="button"
-          onClick={function () {
-            format("underline");
-          }}
-        >
-          U
-        </button>
-        <button
-          type="button"
-          onClick={function () {
-            props.setValue("");
-          }}
-        >
-          Tozalash
-        </button>
-      </div>
-
+    <div className="space-y-2 border rounded p-3 backdrop-blur-2xl border-[#ffffff1e]">
       <div
         ref={ref}
         contentEditable
-        onInput={function (e) {
-          props.setValue(e.currentTarget.innerHTML);
-        }}
-        suppressContentEditableWarning={true}
+        onInput={(e) => setValue(e.currentTarget.innerHTML)}
+        suppressContentEditableWarning
+        className="min-h-[283px] w-full overflow-auto outline-none text-lg"
       />
+
+      <div className="flex gap-3">
+        <Button onClick={() => format("bold")} variant="secondary" size="icon" className="size-7 rounded font-bold" title="Bold">
+          B
+        </Button>
+        <Button onClick={() => format("italic")} variant="secondary" size="icon" className="size-7 rounded italic" title="Italic">
+          i
+        </Button>
+        <Button onClick={() => format("underline")} variant="secondary" size="icon" className="size-7 rounded underline" title="Underline">
+          U
+        </Button>
+        <Button onClick={() => setValue("")} variant="link" className="size-7 rounded text-white" title="Clear input">
+          Clear
+        </Button>
+      </div>
     </div>
   );
 }

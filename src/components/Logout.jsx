@@ -1,5 +1,5 @@
-import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function Logout() {
   const router = useRouter();
@@ -9,5 +9,5 @@ export default function Logout() {
     router.push("/login");
   }
 
-  return <button onClick={handleLogout}>Chiqish</button>;
+  return <button onClick={handleLogout}>Logo ut</button>;
 }

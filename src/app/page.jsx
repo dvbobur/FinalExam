@@ -1,5 +1,11 @@
-import Home from "@/pages/home";
+import Header from "@/components/Header";
+import Home from "@/app/home/page";
 
 export default function Page() {
-  return <Home />;
+  return (
+    <>
+      <Header />
+      <Home />
+    </>
+  );
 }
